@@ -1,0 +1,54 @@
+<form [formGroup]="vehicleForm" (submit)="onSubmit()">
+  <lib-shared-form-field
+    label="Marca:"
+    forId="brandInput"
+    [errorMessage]="getErrorMessage('brand')"
+  >
+    <lib-shared-input
+      id="brandInput"
+      type="text"
+      placeholder="Ej: Toyota"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Modelo:" forId="modelInput">
+    <lib-shared-input
+      id="modelInput"
+      type="text"
+      placeholder="Ej: Corolla"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Año:" forId="yearInput">
+    <lib-shared-input
+      id="yearInput"
+      type="number"
+      placeholder="Ej: 2020"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Tipo de Uso:" forId="typeOfUseInput">
+    <select id="typeOfUseInput" formControlName="typeOfUse">
+      <option value="">Selecciona un tipo</option>
+      <option value="personal">Personal</option>
+      <option value="work">Trabajo</option>
+      <option value="cargo">Carga</option>
+    </select>
+  </lib-shared-form-field>
+
+  <div class="form-actions">
+    <lib-shared-button
+      [label]="submitLabel"
+      appearance="primary"
+      type="submit"
+      [disabled]="vehicleForm.invalid"
+      (clicked)="onSubmit()"
+    ></lib-shared-button>
+    <lib-shared-button
+      label="Cancelar"
+      appearance="secondary"
+      type="button"
+      (clicked)="onCancel()"
+    ></lib-shared-button>
+  </div>
+</form>

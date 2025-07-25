@@ -1,0 +1,44 @@
+<div class="vehicle-list-container">
+  <h3>Listado de Vehículos</h3>
+
+  <div *ngIf="loading" class="loading-indicator">Cargando vehículos...</div>
+
+  <table *ngIf="!loading" class="vehicle-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Tipo de Uso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="hasVehicles(); else noVehicles">
+        <tr *ngFor="let vehicle of vehicles">
+          <td>{{ vehicle.id }}</td>
+          <td>{{ vehicle.brand }}</td>
+          <td>{{ vehicle.model }}</td>
+          <td>{{ vehicle.year }}</td>
+          <td>{{ vehicle.typeOfUse }}</td>
+          <td class="actions-cell">
+            <button class="btn btn-edit" (click)="onEdit(vehicle)">
+              Editar
+            </button>
+            <button class="btn btn-delete" (click)="onDelete(vehicle.id!)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #noVehicles>
+        <tr>
+          <td colspan="6" class="no-data-message">
+            No se encontraron vehículos.
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>
