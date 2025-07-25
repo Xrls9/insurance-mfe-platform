@@ -1,0 +1,46 @@
+services:
+  app-suite-app:
+    build:
+      context: .
+      dockerfile: apps/app-suite/Dockerfile
+      args:
+        APP_NAME: app-suite
+    container_name: app-suite-container
+    ports:
+      - '4200:80'
+    volumes:
+      - ./apps/app-suite/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - mfe-network
+
+  vehicle-app:
+    build:
+      context: .
+      dockerfile: apps/vehicles/Dockerfile
+      args:
+        APP_NAME: vehicle
+    container_name: vehicle-container
+    ports:
+      - '4201:80'
+    volumes:
+      - ./apps/vehicles/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - mfe-network
+
+  quotation-app:
+    build:
+      context: .
+      dockerfile: apps/quotation/Dockerfile
+      args:
+        APP_NAME: quotation
+    container_name: quotation-container
+    ports:
+      - '4202:80'
+    volumes:
+      - ./apps/quotation/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - mfe-network
+
+networks:
+  mfe-network:
+    driver: bridge

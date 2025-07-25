@@ -14,7 +14,10 @@ const config: ModuleFederationConfig = {
    * declare module 'my-external-remote';
    *
    */
-  remotes: ['vehicles', 'quotation'],
+  remotes: [
+    ['vehicles', 'http://localhost:4201/remoteEntry.js'],
+    ['quotation', 'http://localhost:4202/remoteEntry.js'],
+  ],
 };
 
 /**
