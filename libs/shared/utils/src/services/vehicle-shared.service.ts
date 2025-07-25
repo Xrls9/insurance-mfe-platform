@@ -16,8 +16,14 @@ export class VehiclesService {
       year: 2020,
       typeOfUse: 'personal',
     },
-    { id: '2', brand: 'Honda', model: 'Civic', year: 2019, typeOfUse: 'work' },
-    { id: '3', brand: 'Ford', model: 'F-150', year: 2021, typeOfUse: 'cargo' },
+    {
+      id: '2',
+      brand: 'Honda',
+      model: 'Civic',
+      year: 2019,
+      typeOfUse: 'trabajo',
+    },
+    { id: '3', brand: 'Ford', model: 'F-150', year: 2021, typeOfUse: 'carga' },
   ];
 
   private http = inject(HttpClient);

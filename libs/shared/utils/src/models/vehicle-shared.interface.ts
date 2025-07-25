@@ -3,5 +3,5 @@ export interface Vehicle {
   brand: string;
   model: string;
   year: number;
-  typeOfUse: 'personal' | 'work' | 'cargo';
+  typeOfUse: 'personal' | 'trabajo' | 'carga';
 }
