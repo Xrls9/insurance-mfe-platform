@@ -1,13 +1,11 @@
 <div class="dashboard-layout">
-  <h1>Listado de Vehículos</h1>
-
   <div class="list-card">
-    <button class="btn btn-primary" (click)="onAddVehicle()">Nuevo</button>
     <app-vehicle-table-component
       [vehicles]="(vehicles | async)"
       [loading]="isLoading"
       (editVehicle)="onEditVehicle($event)"
       (deleteVehicle)="onDeleteVehicle($event)"
+      (addVehicle)="onAddVehicle()"
     ></app-vehicle-table-component>
   </div>
 </div>

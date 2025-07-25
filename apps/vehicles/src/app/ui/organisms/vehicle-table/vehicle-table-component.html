@@ -1,5 +1,13 @@
 <div class="vehicle-list-container">
-  <h3>Listado de Vehículos</h3>
+  <div class="title-container">
+    <h3>Listado de Vehículos</h3>
+    <lib-shared-button
+      label="Nuevo"
+      appearance="primary"
+      type="button"
+      (clicked)="onAdd()"
+    ></lib-shared-button>
+  </div>
 
   <div *ngIf="loading" class="loading-indicator">Cargando vehículos...</div>
 
