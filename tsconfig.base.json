@@ -15,6 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@vehicle-insurance-monorepo/shared-ui": ["libs/shared/ui/src/index.ts"],
+      "@vehicle-insurance-monorepo/shared-utils": [
+        "libs/shared/utils/src/index.ts"
+      ],
       "quotation/Module": [
         "apps/quotation/src/app/remote-entry/entry-module.ts"
       ],

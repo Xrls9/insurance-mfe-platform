@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { App } from './app';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [App],
@@ -20,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ],
       { initialNavigation: 'enabledBlocking' }
     ),
-    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [App],
