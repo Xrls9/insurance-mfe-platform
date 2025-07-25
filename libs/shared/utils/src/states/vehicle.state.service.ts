@@ -90,6 +90,11 @@ export class VehicleStateService {
     );
   }
 
+  getVehicleSync(id: string): Vehicle | undefined {
+    const currentVehicles = this._vehicles.getValue();
+    return currentVehicles.find((vehicle) => vehicle.id === id);
+  }
+
   getVehicleById(id: string): Observable<Vehicle | undefined> {
     return this.vehicles$.pipe(
       map((vehicles) => vehicles.find((vehicle) => vehicle.id === id))
