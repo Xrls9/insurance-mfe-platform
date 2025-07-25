@@ -1,0 +1,10 @@
+<div class="dashboard-layout">
+  <div class="list-card">
+    <app-quotation-table-component
+      [quotations]="(quotations | async)"
+      [loading]="isLoading"
+      (deleteQuotation)="onDeleteQuotation($event)"
+      (addQuotation)="onAddVehicle()"
+    ></app-quotation-table-component>
+  </div>
+</div>

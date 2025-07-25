@@ -1,0 +1,45 @@
+<div class="vehicle-list-container">
+  <div class="title-container">
+    <h3>Listado de Vehículos</h3>
+    <lib-shared-button
+      label="Nuevo"
+      appearance="primary"
+      type="button"
+      (clicked)="onAdd()"
+    ></lib-shared-button>
+  </div>
+
+  <div *ngIf="loading" class="loading-indicator">Cargando vehículos...</div>
+
+  <table *ngIf="!loading" class="vehicle-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Tipo de Uso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="hasVehicles(); else noVehicles">
+        <tr *ngFor="let quotation of quotations">
+          <td>{{ quotation.id }}</td>
+          <td class="actions-cell">
+            <button class="btn btn-delete" (click)="onDelete(quotation.id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #noVehicles>
+        <tr>
+          <td colspan="6" class="no-data-message">
+            No se encontraron vehículos.
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>

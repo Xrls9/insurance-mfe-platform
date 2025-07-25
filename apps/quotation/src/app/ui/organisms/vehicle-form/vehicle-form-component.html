@@ -1,0 +1,49 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <lib-shared-form-field label="Marca:" forId="brandInput">
+    <lib-shared-input
+      id="brandInput"
+      type="text"
+      [control]="getFormControl('brand')"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Modelo:" forId="modelInput">
+    <lib-shared-input
+      id="modelInput"
+      type="text"
+      [control]="getFormControl('model')"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Año:" forId="yearInput">
+    <lib-shared-input
+      id="yearInput"
+      type="number"
+      [control]="getFormControl('year')"
+    ></lib-shared-input>
+  </lib-shared-form-field>
+
+  <lib-shared-form-field label="Tipo de Uso:" forId="typeOfUseInput">
+    <select id="typeOfUseInput" formControlName="typeOfUse">
+      <option value="">Selecciona un tipo</option>
+      <option value="personal">Personal</option>
+      <option value="trabajo">Trabajo</option>
+      <option value="carga">Carga</option>
+    </select>
+  </lib-shared-form-field>
+
+  <div class="form-actions">
+    <lib-shared-button
+      [label]="submitLabel"
+      appearance="primary"
+      type="submit"
+      (clicked)="onSubmit()"
+    ></lib-shared-button>
+    <lib-shared-button
+      label="Cancelar"
+      appearance="secondary"
+      type="button"
+      (clicked)="onCancel()"
+    ></lib-shared-button>
+  </div>
+</form>
