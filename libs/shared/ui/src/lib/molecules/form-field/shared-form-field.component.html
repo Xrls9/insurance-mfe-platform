@@ -1,0 +1,15 @@
+<div class="form-field-wrapper">
+  <lib-shared-label
+    *ngIf="label"
+    [forId]="forId"
+    [required]="required"
+  >
+    {{ label }}
+  </lib-shared-label>
+
+  <ng-content select="lib-shared-input, input, select, textarea"></ng-content>
+
+  <div *ngIf="errorMessage" class="error-message" [id]="forId ? forId + '-error' : null">
+    {{ errorMessage }}
+  </div>
+</div>

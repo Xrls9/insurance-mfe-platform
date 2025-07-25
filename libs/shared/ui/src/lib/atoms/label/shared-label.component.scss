@@ -1,0 +1,12 @@
+.shared-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+
+  .required-indicator {
+    color: #dc3545;
+    margin-left: 4px;
+  }
+}
