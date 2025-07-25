@@ -18,6 +18,7 @@ import {
 } from '@vehicle-insurance-monorepo/shared-ui';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -37,103 +38,73 @@ import {
   templateUrl: './vehicle-form-component.html',
   styleUrl: './vehicle-form-component.css',
 })
-export class VehicleFormComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() vehicle: Vehicle | null | undefined = null;
+export class VehicleFormComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() record: Vehicle | null | undefined = null;
   @Input() submitLabel = 'Guardar';
-
   @Output() formSubmit = new EventEmitter<Vehicle>();
   @Output() formCancel = new EventEmitter<void>();
 
-  vehicleForm!: FormGroup;
-
   private fb = inject(FormBuilder);
+  form: FormGroup = this.fb.group({
+    id: null,
+    brand: ['', Validators.required],
+    model: ['', Validators.required],
+    year: [1900, [Validators.required, Validators.min(1900)]],
+    typeOfUse: ['personal', Validators.required],
+  });
 
   ngOnInit(): void {
-    this.initForm();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['vehicle'] && !changes['vehicle'].firstChange) {
-      const currentVehicleValue = changes['vehicle'].currentValue;
-      if (currentVehicleValue) {
-        this.vehicleForm.patchValue(currentVehicleValue);
-      } else {
-        this.resetForm();
-      }
-    }
+    this.loadRecord();
+    console.log('record', this.record);
+    console.log('form', this.form.value);
   }
 
   ngOnDestroy(): void {
     this.resetForm();
   }
 
-  private getInitialValue(): Vehicle {
-    return {
-      id: '',
-      brand: '',
-      model: '',
-      year: 0,
-      typeOfUse: 'personal',
-    };
-  }
-
-  private initForm(): void {
-    this.vehicleForm = this.fb.group({
-      id: [''],
-      brand: ['', Validators.required],
-      model: ['', Validators.required],
-      year: [
-        '',
-        [
-          Validators.required,
-          Validators.min(1900),
-          Validators.max(new Date().getFullYear() + 1),
-        ],
-      ],
-      typeOfUse: ['personal', Validators.required],
-    });
-
-    if (this.vehicle) {
-      this.vehicleForm.patchValue(this.vehicle);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['record'] && this.record) {
+      this.form.patchValue(this.record);
+    } else if (changes['record'] && this.record === null && this.form) {
+      this.resetForm();
     }
   }
 
+  loadRecord() {
+    if (this.record) {
+      this.form.patchValue(this.record);
+    } else {
+      this.resetForm();
+    }
+  }
   onSubmit(): void {
-    if (this.vehicleForm.valid) {
-      this.formSubmit.emit(this.vehicleForm.value);
-      if (!this.vehicleForm.value.id) {
-        this.resetForm();
-      }
+    if (!this.form.valid) {
+      return;
     }
+    this.formSubmit.emit(this.form.value);
   }
 
   onCancel(): void {
-    this.resetForm();
+    this.form.reset();
     this.formCancel.emit();
   }
 
   resetForm(): void {
-    this.vehicleForm.reset(this.getInitialValue);
+    this.form.reset({
+      id: null,
+      brand: '',
+      model: '',
+      typeOfUse: 'personal',
+      year: 1900,
+    });
   }
 
-  get f() {
-    return this.vehicleForm.controls;
-  }
-
-  getErrorMessage(controlName: string): string | null {
-    const control = this.f[controlName];
-    if (control?.touched && control.invalid) {
-      if (control.errors?.['required']) {
-        return 'Este campo es requerido.';
-      }
-      if (control.errors?.['min']) {
-        return `El año debe ser al menos ${control.errors['min'].min}.`;
-      }
-      if (control.errors?.['max']) {
-        return `El año no puede ser mayor a ${control.errors['max'].max}.`;
-      }
-      return 'Valor inválido.';
+  getFormControl(name: string): FormControl {
+    const control = this.form.get(name);
+    if (control instanceof FormControl) {
+      return control;
     }
-    return null;
+    throw new Error(`Control '${name}' not found or is not a FormControl.`);
   }
 }

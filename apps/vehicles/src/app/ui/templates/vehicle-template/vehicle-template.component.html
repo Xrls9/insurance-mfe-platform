@@ -1,12 +1,14 @@
 <div class="form-page-layout">
-  <h1>{{ (selectedVehicle$ | async) ? 'Editar Vehículo' : 'Registrar Nuevo Vehículo' }}</h1>
+    <div class="page-header">
+        <h1>{{ (selectedVehicle$ | async) ? 'Editar Vehículo' : 'Registrar Nuevo Vehículo' }}</h1>
+    </div>
 
   <div class="form-card">
     <app-vehicle-form-component
-      [vehicle]="(selectedVehicle$ | async)"
+      [record]="(selectedVehicle$ | async)"
       [submitLabel]="submitLabel"
       (formSubmit)="onVehicleFormSubmit($event)"
-      (cancel)="onCancelForm()"
+      (formCancel)="onFormCancel()"
     ></app-vehicle-form-component>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -50,26 +50,26 @@ export class VehicleFormPageComponent implements OnInit {
       this.vehicleStateService.updateVehicle(vehicle).subscribe(
         () => {
           alert('Vehículo actualizado correctamente.');
-          this.onCancelForm();
+          this.onFormCancel();
         },
         (error) => {
-          alert('Error al actualizar vehículo.');
+          alert(`Error al actualizar vehículo: ${error}`);
         }
       );
     } else {
       this.vehicleStateService.addVehicle(vehicle).subscribe(
         () => {
           alert('Vehículo creado correctamente.');
-          this.onCancelForm();
+          this.onFormCancel();
         },
         (error) => {
-          alert('Error al crear vehículo.');
+          alert(`Error al actualizar vehículo: ${error}`);
         }
       );
     }
   }
 
-  onCancelForm(): void {
+  onFormCancel(): void {
     this.router.navigate(['/vehicles']);
   }
 }

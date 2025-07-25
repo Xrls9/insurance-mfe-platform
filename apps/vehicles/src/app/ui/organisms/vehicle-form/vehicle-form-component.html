@@ -1,13 +1,9 @@
-<form [formGroup]="vehicleForm" (submit)="onSubmit()">
-  <lib-shared-form-field
-    label="Marca:"
-    forId="brandInput"
-    [errorMessage]="getErrorMessage('brand')"
-  >
+<form [formGroup]="form" (submit)="onSubmit()">
+  <lib-shared-form-field label="Marca:" forId="brandInput">
     <lib-shared-input
       id="brandInput"
       type="text"
-      placeholder="Ej: Toyota"
+      [control]="getFormControl('brand')"
     ></lib-shared-input>
   </lib-shared-form-field>
 
@@ -15,7 +11,7 @@
     <lib-shared-input
       id="modelInput"
       type="text"
-      placeholder="Ej: Corolla"
+      [control]="getFormControl('model')"
     ></lib-shared-input>
   </lib-shared-form-field>
 
@@ -23,7 +19,7 @@
     <lib-shared-input
       id="yearInput"
       type="number"
-      placeholder="Ej: 2020"
+      [control]="getFormControl('year')"
     ></lib-shared-input>
   </lib-shared-form-field>
 
@@ -31,8 +27,8 @@
     <select id="typeOfUseInput" formControlName="typeOfUse">
       <option value="">Selecciona un tipo</option>
       <option value="personal">Personal</option>
-      <option value="work">Trabajo</option>
-      <option value="cargo">Carga</option>
+      <option value="trabajo">Trabajo</option>
+      <option value="carga">Carga</option>
     </select>
   </lib-shared-form-field>
 
@@ -41,7 +37,6 @@
       [label]="submitLabel"
       appearance="primary"
       type="submit"
-      [disabled]="vehicleForm.invalid"
       (clicked)="onSubmit()"
     ></lib-shared-button>
     <lib-shared-button
